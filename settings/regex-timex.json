@@ -1,0 +1,5 @@
+{
+  "set": "^(\bevery\b|\bonce\b|\btwice\b|\bfor\b)|(\beach\b|\bevery\b)",
+  "duration": "for|during",
+  "date_specific": "today|tomorrow|yesterday|monday|tuesday|wednesday|thursday|friday|saturday|sunday"
+}
