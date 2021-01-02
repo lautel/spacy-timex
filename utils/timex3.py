@@ -77,7 +77,7 @@ class Timex3(object):
 
         # Build and return tag with non-optional attributes
         if label == Types.SET.name:
-            set_word = re.match(self.regex['set'], entity.text).group(0)
+            set_word = re.match(self.regex["set"], entity.text).group(0)
             tag = f"<TIMEX3 tid=t{tid} type={label} quant={set_word} value={value}>{text}</TIMEX3>"
         else:
             tag = f"<TIMEX3 tid=t{tid} type={label} value={value}>{text}</TIMEX3>"

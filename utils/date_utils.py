@@ -4,7 +4,7 @@ from typing import List
 
 def convert_date(datetime_string: str, output_format: str="%Y-%m-%dT%H:%M:%S") -> str:
     """ Method that maps an ISO format date into the desired """
-    datetime_string = datetime_string.replace("Z", '')
+    datetime_string = datetime_string.replace("Z", "")
     datetime_object = datetime.fromisoformat(datetime_string)
     date_string_output = datetime_object.strftime(output_format)
     return date_string_output

@@ -1,7 +1,6 @@
 import pytest
 from spacy.lang.en import English
 from duckling import Context
-from main import TemporalExpressionParser
 from utils.timex3 import Types, Timex3
 
 
@@ -43,6 +42,9 @@ class TestTimex(object):
         time_expression = "first thursday of december"
         date = timex._get_value(time_expression, "DATE")
         assert date == "2021-12-02"
+
+        date = timex._get_value(" ", "UNK")
+        assert date == "XX"
 
     def test_get_tag(self, timex):
         tid = 3

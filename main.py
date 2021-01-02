@@ -20,11 +20,11 @@ class TemporalExpressionParser(object):
         try:
             self.nlp = spacy.load(spacy_model, disable="textcat")
         except Exception as ex:
-            log.fatal(f'Spacy Load failed. Exception: {str(ex)}')
+            log.fatal(f"Spacy Load failed. Exception: {str(ex)}")
             sys.exit()
 
-        Doc.set_extension('temp_ents', default=[], force=True)
-        Doc.set_extension('text_annotated', default="", force=True)
+        Doc.set_extension("temp_ents", default=[], force=True)
+        Doc.set_extension("text_annotated", default="", force=True)
 
         time_parser = TimeParser()
         self.nlp.add_pipe(time_parser, after="ner")
@@ -34,7 +34,7 @@ class TemporalExpressionParser(object):
 
         :param text: input text.
         :param ref_date: reference date in format YYYY-MM-dd HH:mm.
-        If it isn't provided, set current UTC datetime to default.
+        If it isn"t provided, set current UTC datetime to default.
         :return text: input text parsed with TIMEX3 tags
         """
 
@@ -45,7 +45,8 @@ class TemporalExpressionParser(object):
 
         return text
 
-    def _clean_text(self, text: str) -> str:
+    @staticmethod
+    def _clean_text(text: str) -> str:
         """
         Normalize encoding and clean input text
         :param text: input text
@@ -66,11 +67,11 @@ if __name__ == "__main__":
 
     st = TemporalExpressionParser(args.spacy_model)
 
-    date = datetime.utcnow().strftime('%Y-%m-%dT%H:%M')
+    date = datetime.utcnow().strftime("%Y-%m-%dT%H:%M")
     input_text = args.input_text
 
     while input_text:
         text = st.detect_temporal_expressions(input_text, date)
         print(text)
-        print("Write another sentence: ")
+        print("Write another sentence: ", end=" ")
         input_text = input()
