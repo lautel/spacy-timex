@@ -49,7 +49,7 @@ def format_result_from_duckling(dates: List[dict]) -> List[str]:
             d_to = item.get("value", {}).get("to", {}).get("value")
             result.append(d_to[:-3])
         elif type(d) is str:
-            result.append(convert_date(d)[:-3])
+            result.append(convert_date(d, output_format="%Y-%m-%dT%H:%M"))
     return result
 
 
