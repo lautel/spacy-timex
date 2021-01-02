@@ -101,7 +101,6 @@ class Timex3(object):
         # Get date values from the object returned by duckling
         dates_list = format_result_from_duckling(dates)
         # TODO: Properly convert into timex3 value
-        print("\n\n dates_list", dates_list)
         main_date = self._parse_str_to_timex3(dates_list, time_expression, label)
         return main_date
 
