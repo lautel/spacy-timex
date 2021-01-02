@@ -84,7 +84,8 @@ class Timex3(object):
         return tag
 
     def _get_label_type(self, entity: Span, sentence: str) -> str:
-        if re.search(self.regex.get("set", "#None"), entity.text):
+        if re.search(self.regex.get("set", "#None"), entity.text) or \
+                re.search(self.regex.get("set", "#None"), sentence[entity.start_char-10:entity.start_char]):
             return Types.SET.name
         elif re.search(self.regex.get("duration", "#None"), sentence[entity.start_char-10:entity.start_char]):
             return Types.DURATION.name
@@ -109,18 +110,23 @@ class Timex3(object):
         if len(dates_list) > 0:
             # TODO: Cover all cases
             main_date = dates_list[0]
-
+            # Remove time added by duckling which doesn't give information
+            main_date = main_date.replace("T00:00", "")
             if label == "TIME":
                 # and main_date.split("T")[0] == today
                 main_date = main_date.replace(main_date.split("T")[0], "")
             elif label == "DURATION":
                 main_date = "P" + main_date
+            elif label == "SET":
+                # If year is not named in the time expression and it isn't a specific day, make it general:
+                main_date = main_date.replace(main_date[:4], "XXXX")
+                if re.search(self.regex.get("set_month_specific", "#None"), time_expression):
+                    # Remove day
+                    main_date = main_date[:-3]
             elif main_date[:4] not in time_expression \
                     and not re.search(self.regex.get("date_specific", "#None"), time_expression):
                 # If year is not named in the time expression and it isn't a specific day, make it general:
                 main_date = main_date.replace(main_date[:4], "XXXX")
-            # Remove time added by duckling which doesn't give information
-            main_date = main_date.replace("T00:00", "")
         else:
             try:
                 # We're here usually for SET and DURATION types (part of the day)

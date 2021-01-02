@@ -1,5 +1,6 @@
 {
-  "set": "^(\bevery\b|\bonce\b|\btwice\b|\bfor\b)|(\beach\b|\bevery\b)",
+  "set": "^(every|once|twice|for)|(\beach\b|\bevery\b)",
+  "set_month_specific": "january|february|march|april|may|june|july|august|september|october|november|december",
   "duration": "for|during",
   "date_specific": "today|tomorrow|yesterday|monday|tuesday|wednesday|thursday|friday|saturday|sunday"
 }
