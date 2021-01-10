@@ -1,0 +1,7 @@
+{
+    "ACTIVE_SERVICES": [
+        "health",
+        "timex"
+    ],
+    "TIMEOUT": 30
+}
